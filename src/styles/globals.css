@@ -1,0 +1,50 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Main Layout */
+body {
+  font-family: "Raleway", sans-serif;
+  background: #f7f7f7;
+  color: #222;
+  line-height: 1.5;
+  padding-bottom: 4rem;
+}
+
+main {
+  width: 90%;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+/* Cards */
+.launch-card {
+  background: white;
+  padding: 1.2rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Page Titles */
+h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+/* Buttons */
+.button {
+  background: #005eff;
+  color: white;
+  padding: 0.55rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #0048c4;
+}
