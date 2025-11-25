@@ -8,6 +8,7 @@ import LaunchesPage from "./pages/LaunchesPage";
 import RocketsPage from "./pages/RocketsPage";
 import ChartsPage from "./pages/ChartsPage";
 import Navbar from "./components/Navbar";
+import LaunchDetailPage from "./pages/LaunchDetailPage";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/" element={<LaunchesPage />} />
         <Route path="/rockets" element={<RocketsPage />} />
         <Route path="/charts" element={<ChartsPage />} />
+        <Route path="/launch/:id" element={<LaunchDetailPage />} />
       </Routes>
     </Router>
   );
