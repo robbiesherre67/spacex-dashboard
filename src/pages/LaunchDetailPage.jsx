@@ -104,7 +104,7 @@ export default function LaunchDetailPage() {
           {launch.details || "No mission details available."}
         </p>
         <p>
-        <a href="/" style={{ color: "var(--primary)" }}>← Back to launches</a>
+        <a href="https://robbiesherre67.github.io/spacex-dashboard/" style={{ color: "var(--primary)" }}>← Back to launches</a>
         </p>
       </div>
     </main>
