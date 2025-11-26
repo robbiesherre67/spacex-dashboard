@@ -15,10 +15,11 @@ export default function LaunchCard({ launch }) {
       style={{ textDecoration: "none", color: "inherit" }}
     >
       <div className="launch-card">
-        <h3>{launch.name}</h3>
-        <p>Date: {new Date(launch.date_utc).toLocaleDateString()}</p>
-        <p>Flight Number: {launch.flight_number}</p>
+        <h2>{launch.name}</h2>
+        <p>{new Date(launch.date_utc).toLocaleDateString()}</p>
+        <p>{launch.details ? launch.details.slice(0, 120) + "..." : "No details available."}</p>
       </div>
     </Link>
   );
 }
+

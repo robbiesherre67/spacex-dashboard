@@ -9,65 +9,104 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchLaunchById } from "../api/spacexApi";
+import { Link } from "react-router-dom";
+
+// Reusable formatter
+function formatDate(d) {
+  return new Date(d).toLocaleString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  });
+}
 
 export default function LaunchDetailPage() {
-  // useParams gives us the dynamic route part from the URL
   const { id } = useParams();
-
-  // Local state: this does NOT need Redux since it's single-item data
   const [launch, setLaunch] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadLaunch() {
+    async function fetchLaunch() {
       try {
-        const { data } = await fetchLaunchById(id);
+        const res = await fetch(`https://api.spacexdata.com/v4/launches/${id}`);
+        const data = await res.json();
         setLaunch(data);
-      } catch (error) {
-        console.error("Error fetching launch:", error);
+      } catch (e) {
+        console.error("Failed to load launch", e);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
 
-    loadLaunch();
+    fetchLaunch();
   }, [id]);
 
-  if (loading) return <p>Loading launch details...</p>;
-  if (!launch) return <p>Launch not found.</p>;
+  if (loading) return <main><p>Loading launch...</p></main>;
+  if (!launch) return <main><p>Launch not found.</p></main>;
 
   return (
     <main>
       <h1>{launch.name}</h1>
-
-      {/* Mission patch */}
-      {launch.links.patch.large && (
-        <img
-          src={launch.links.patch.large}
-          alt={`${launch.name} mission patch`}
-          style={{ width: "200px", marginBottom: "1rem" }}
-        />
-      )}
-
-      <p><strong>Date:</strong> {new Date(launch.date_utc).toLocaleString()}</p>
-      <p><strong>Flight Number:</strong> {launch.flight_number}</p>
-      <p><strong>Success:</strong> {launch.success ? "Yes" : "No"}</p>
-
-      {/* Details */}
-      {launch.details && (
-        <p style={{ marginTop: "1rem" }}>
-          <strong>Details:</strong> {launch.details}
-        </p>
-      )}
-
-      {/* Back Button */}
-      <button
-        className="button"
-        onClick={() => window.history.back()}
-        style={{ marginTop: "1.5rem" }}
+      <div
+        style={{
+          background: "var(--surface)",
+          padding: "1.5rem",
+          borderRadius: "8px",
+          boxShadow: "0 2px 6px var(--card-shadow)",
+          marginTop: "1rem"
+        }}
       >
-        ← Back to Launches
-      </button>
+        {/* Mission Patch */}
+        {launch.links?.patch?.large && (
+          <img
+            src={launch.links.patch.large}
+            alt={`${launch.name} patch`}
+            style={{ width: 180, marginBottom: "1rem" }}
+          />
+        )}
+
+        <p><strong>Date:</strong> {formatDate(launch.date_utc)}</p>
+
+        <p>
+          <strong>Success:</strong>{" "}
+          {launch.success ? (
+            <span style={{ color: "green" }}>✔ Successful</span>
+          ) : (
+            <span style={{ color: "red" }}>✘ Failed</span>
+          )}
+        </p>
+
+        <p>
+          <strong>Rocket:</strong>{" "}
+          <Link
+            to={`/rocket/${launch.rocket}`}
+            style={{ color: "var(--primary)" }}
+          >
+            View Rocket →
+          </Link>
+        </p>
+
+<p>
+  <strong>Launchpad:</strong>{" "}
+  <Link
+    to={`/launchpad/${launch.launchpad}`}
+    style={{ color: "var(--primary)" }}
+  >
+    View Map →
+  </Link>
+</p>
+
+
+        <p style={{ marginTop: "1rem", lineHeight: "1.6" }}>
+          <strong>Details:</strong><br />
+          {launch.details || "No mission details available."}
+        </p>
+        <p>
+        <a href="/" style={{ color: "var(--primary)" }}>← Back to launches</a>
+        </p>
+      </div>
     </main>
   );
 }
