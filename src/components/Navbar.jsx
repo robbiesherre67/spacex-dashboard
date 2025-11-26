@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import ThemeToggle from "./ThemeToggle";
-
 // Purpose:
 // - Fully responsive navbar
 // - Hamburger menu at tablet/mobile widths
 // - Dark/light toggle safely moves into right side without collision
 // - Accessible: ARIA labels, keyboard focus, role="button"
+
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -76,6 +76,19 @@ export default function Navbar() {
             Launches
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/launchpads"
+            onClick={() => setOpen(false)}
+            style={({ isActive }) => ({
+              textDecoration: "none",
+              color: isActive ? "var(--primary)" : "var(--text)",
+              fontWeight: isActive ? 700 : 500
+            })}
+          >
+            Launchpads
+          </NavLink>
+        </li>
 
         <li>
           <NavLink
@@ -118,6 +131,20 @@ export default function Navbar() {
             Rocket Fleet
           </NavLink>
         </li>
+
+        <li>
+        <NavLink
+          to="/fleet-compare"
+          onClick={() => setOpen(false)}
+          style={({ isActive }) => ({
+            textDecoration: "none",
+            color: isActive ? "var(--primary)" : "var(--text)",
+            fontWeight: isActive ? 700 : 500
+          })}
+        >
+          Fleet Compare
+        </NavLink>
+       </li>
 
         {/* Theme toggle shows here on desktop + inside list on mobile */}
         <li className="theme-toggle-mobile">
