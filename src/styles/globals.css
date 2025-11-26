@@ -182,9 +182,21 @@ nav a.active {
   display: flex;
   flex-direction: row;
   gap: 1.7rem;
-  list-style: none;   /* <-- FIXES BULLETS */
+  list-style: none;       /* REMOVE BULLETS */
   padding: 0;
   margin: 0;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.nav-link.active {
+  color: var(--primary);
+  font-weight: 700;
 }
 
 /* Hide mobile theme toggle by default */
@@ -217,11 +229,14 @@ nav a.active {
 
   /* Mobile drawer menu */
   .nav-list {
-    display: none; /* hidden by default */
+    display: none;             /* hidden by default */
     flex-direction: column;
     gap: 1.5rem;
+    list-style: none;          /* REMOVE BULLETS HERE TOO */
 
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 2rem;      /* spacing from screen edge */
+    align-items: flex-start;   /* left aligned */
+
     background: var(--surface);
     box-shadow: 0 3px 8px var(--card-shadow);
 
@@ -230,9 +245,6 @@ nav a.active {
     left: 0;
     right: 0;
     z-index: 1500;
-
-    list-style: none;  /* <-- MOBILE ALSO NEEDS THIS */
-    align-items: flex-start;
   }
 
   /* When open */
@@ -240,6 +252,8 @@ nav a.active {
     display: flex !important;
   }
 }
+
+/* Pagination buttons (unchanged) */
 .page-btn {
   min-width: 40px;
   text-align: center;

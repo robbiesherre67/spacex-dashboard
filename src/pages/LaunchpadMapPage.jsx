@@ -65,14 +65,10 @@ export default function LaunchpadMapPage() {
         >
           {/* Light / dark tile layer based on theme */}
           <TileLayer
-            url={
-              document.documentElement.dataset.theme === "dark"
-                ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-                : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-            }
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
-
+          
           {pads.map((pad) => (
             <Marker
               key={pad.id}
