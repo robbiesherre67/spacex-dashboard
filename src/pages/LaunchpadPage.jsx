@@ -40,7 +40,7 @@ export default function LaunchpadPage() {
       <h1>{pad.name}</h1>
 
       <p>
-        <Link to="/" style={{ color: "var(--primary)" }}>
+        <Link to="https://robbiesherre67.github.io/spacex-dashboard/" style={{ color: "var(--primary)" }}>
           ← Back to Launches
         </Link>
       </p>
