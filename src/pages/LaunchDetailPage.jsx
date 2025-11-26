@@ -88,16 +88,15 @@ export default function LaunchDetailPage() {
           </Link>
         </p>
 
-<p>
-  <strong>Launchpad:</strong>{" "}
-  <Link
-    to={`/launchpad/${launch.launchpad}`}
-    style={{ color: "var(--primary)" }}
-  >
-    View Map →
-  </Link>
-</p>
-
+        <p>
+          <strong>Launchpad:</strong>{" "}
+        <Link
+          to="/launchpads"
+          style={{ color: "var(--primary)" }}
+        >
+          View Map →
+        </Link>
+        </p>
 
         <p style={{ marginTop: "1rem", lineHeight: "1.6" }}>
           <strong>Details:</strong><br />
